@@ -1,0 +1,66 @@
+#pragma once
+#include <windows.h>
+#include <string>
+#include <d3dx9.h>
+
+class DX9Render {
+	LPDIRECT3DDEVICE9 pDevice = nullptr;
+	HWND hWnd = NULL;
+
+#pragma region RenderParams
+	DWORD fvf = 0x0;
+
+	IDirect3DVertexShader9* vshader = nullptr;
+	IDirect3DPixelShader9* pshader = nullptr;
+
+	DWORD d3DRS_LIGHTING = 0x0;
+	DWORD d3DRS_FOGENABLE = 0x0;
+	DWORD d3DRS_ZENABLE = 0x0;
+	DWORD d3DRS_ALPHATESTENABLE = 0x0;
+	DWORD d3DRS_CULLMODE = 0x0;
+	DWORD d3DRS_FILLMODE = 0x0;
+	DWORD d3DRS_SCISSORTESTENABLE = 0x0;
+	DWORD d3DRS_ZWRITEENABLE = 0x0;
+	DWORD d3DRS_MULTISAMPLEANTIALIAS = 0x0;
+
+	DWORD d3DSAMP_ADDRESSU = 0x0;
+	DWORD d3DSAMP_ADDRESSV = 0x0;
+
+	DWORD d3DTSS_COLORARG1 = 0x0;
+	DWORD d3DTSS_COLORARG2 = 0x0;
+	DWORD d3DTSS_COLOROP0 = 0x0;
+
+	DWORD d3DTSS_ALPHAARG1 = 0x0;
+	DWORD d3DTSS_ALPHAARG2 = 0x0;
+	DWORD d3DTSS_ALPHAOP = 0x0;
+
+	DWORD d3DSAMP_MINFILTER = 0x0;
+	DWORD d3DSAMP_MAGFILTER = 0x0;
+
+	DWORD d3DTSS_COLOROP1 = 0x0;
+
+	DWORD d3DRS_ALPHABLENDENABLE = 0x0;
+	DWORD d3DRS_SRGBWRITEENABLE = 0x0;
+
+	DWORD d3DRS_SEPARATEALPHABLENDENABLE = 0x0;
+	DWORD d3DRS_SRCBLEND = 0x0;
+
+	DWORD d3DRS_DESTBLEND = 0x0;
+	DWORD d3DRS_SRCBLENDALPHA = 0x0;
+	DWORD d3DRS_DESTBLENDALPHA = 0x0;
+#pragma endregion
+
+public:
+	explicit DX9Render(LPDIRECT3DDEVICE9 pDevice);
+	~DX9Render();
+
+	HWND get_hwnd() const;
+	LPDIRECT3DDEVICE9 get_device() const;
+	RECT get_rect() const;
+
+	void draw_texture(LPDIRECT3DTEXTURE9 texture, RECT *rDest, D3DCOLOR vertexColour = D3DCOLOR_ARGB(255, 255, 255, 255), float rotate = 0) const;
+
+	void begin();
+	void end() const;
+};
+
